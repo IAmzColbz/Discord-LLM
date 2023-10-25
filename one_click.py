@@ -7,7 +7,7 @@ import hashlib
 import argparse
 
 script_dir = os.getcwd()
-conda_env_path = os.path.join(script_dir, "env")
+conda_env_path = os.path.join(script_dir, "installer_files", "env")
 
 
 # Gather Token
@@ -96,10 +96,10 @@ def run_cmd(cmd, assert_success=False, environment=False, capture_output=False, 
     # Use the conda environment
     if environment:
         if is_windows():
-            conda_bat_path = os.path.join(script_dir, "conda", "condabin", "conda.bat")
+            conda_bat_path = os.path.join(script_dir, "installer_files", "conda", "condabin", "conda.bat")
             cmd = "\"" + conda_bat_path + "\" activate \"" + conda_env_path + "\" >nul && " + cmd
         else:
-            conda_sh_path = os.path.join(script_dir, "conda", "etc", "profile.d", "conda.sh")
+            conda_sh_path = os.path.join(script_dir, "conda", "installer_files", "etc", "profile.d", "conda.sh")
             cmd = ". \"" + conda_sh_path + "\" && conda activate \"" + conda_env_path + "\" && " + cmd
 
     # Run shell commands
