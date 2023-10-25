@@ -1,5 +1,7 @@
+"""This script is here for redundancy sake as xlmagen is generally superior in speed and memory util"""
+
 from transformers import AutoTokenizer, pipeline, logging
-from auto_gptq import AutoGPTQForCausalLM, BaseQuantizeConfig
+from auto_gptq import AutoGPTQForCausalLM
 
 
 def callgptq(userprompt):

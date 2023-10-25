@@ -1,0 +1,4 @@
+ # Place your discord app token below, it should be a long string of semi-random characters.
+ # <--->
+
+ # <--->

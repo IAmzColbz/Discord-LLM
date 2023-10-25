@@ -1,12 +1,9 @@
 # This example requires the 'message_content' intent.
 import discord
-from xlmagen import callexgpt, callexmini
+from xlmagen import callexgpt
 import asyncio
-from dotenv import load_dotenv
 import os
-
-load_dotenv()
-TOKEN = os.getenv('DISCORD_TOKEN')
+from one_click import DISCORD_TOKEN
 
 class MyClient(discord.Client):
     async def on_ready(self):
@@ -30,7 +27,7 @@ class MyClient(discord.Client):
             async with message.channel.typing():
 
                 # Send a temporary message indicating the bot is processing the request
-                temp_message = await message.channel.send("Processing your request... NOTE: this is a large model and may be unstable, it may crash the bot. If you would like much more consistent output and speed, use '!mini {prompt}' instead")
+                temp_message = await message.channel.send("Processing your request...")
 
                 print("Debug: Calling gptq")
 
@@ -55,40 +52,10 @@ class MyClient(discord.Client):
                     await message.channel.send(chunk.strip())
 
 
-        elif str(message.content[0:5]) == "!mini":
-        
-            # Send typing indication
-            async with message.channel.typing():
-
-                # Send a temporary message indicating the bot is processing the request
-                temp_message = await message.channel.send("Processing your request... NOTE: The model used here may produce output that is false or unethical and is not endorsed by the bot creator.")
-
-                print("Debug: Calling mini")
-
-                # Run callgptq in an executor
-                loop = asyncio.get_event_loop()
-                response = await loop.run_in_executor(None, callexmini, message.content[6::])
-                split_response = str(response).split('ASSISTANT:')
-
-                # Ensure there's an Assistant's message in the response
-                if len(split_response) < 2:
-                    return ''
-
-                # Delete the temporary message
-                await temp_message.delete()
-                
-                assistant_message = split_response[1]
-                assistant_message = assistant_message.split('USER:')[0] if 'USER:' in assistant_message else assistant_message
-
-                # Split the response into chunks and send each chunk as a separate message
-                chunks = [assistant_message[i:i+2000] for i in range(0, len(assistant_message), 2000)]
-                for chunk in chunks:
-                    await message.channel.send(chunk.strip())
-
 
 intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True
 
 client = MyClient(intents=intents)
-client.run(TOKEN)
+client.run(DISCORD_TOKEN)
