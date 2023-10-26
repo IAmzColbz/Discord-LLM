@@ -143,7 +143,7 @@ def install():
         run_cmd("conda install -y -c \"nvidia/label/cuda-11.8.0\" cuda-runtime", assert_success=True, environment=True)
 
     # Install the webui requirements
-    update_requirements(initial_installation=True)
+    update_requirements()
 
 def update_requirements():
     if not os.path.isdir(os.path.join(script_dir, ".git")):

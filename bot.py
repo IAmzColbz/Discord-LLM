@@ -1,4 +1,3 @@
-# This example requires the 'message_content' intent.
 import discord
 from xlmagen import callexgpt
 import asyncio
