@@ -1,7 +1,7 @@
 # Discord-LLM
 This is a small project that allows the user to run a self-hosted discord bot api. 
 
-## Warning: This project is currently **Non-functional** unless you install everything necessary through a package manager and supply the script with a model on your own!
+## Warning: This project is currently **Non-functional** unless you install everything necessary through a package manager and supply the script with a model on your own! The install scripts do **NOT** work.
 
 # Installation
 Please note the documentation for discord API here: https://discord.com/developers/docs/intro
