@@ -5,7 +5,8 @@ import os, glob
 
 # Directory containing model, tokenizer, generator
 def callexgpt(userprompt):
-    model_directory =  "C:/CodingFiles/Python/DiscordBotto/TheBloke_StableBeluga-13B-GPTQ/"
+    model_directory =  "./"
+    # IMPORTANT: enter your model path here, else the program wont be able to find your model.
 
     # Locate files we need within that directory
 
